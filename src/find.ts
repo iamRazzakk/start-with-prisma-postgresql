@@ -9,14 +9,22 @@ const mainFunction = async () => {
         // find single one or throw an error
         // const findFirst = await prisma.post.findFirstOrThrow({
         where: {
-            id: 5
+            id: 10
+        },
+        // if need selected data 
+        select: {
+            id: true,
+            titlle: true,
+            content: true,
+
         }
     })
+    console.log({ findFirst });
 
     // find unique
     const finUnique = await prisma.post.findUnique({
         where: {
-            id: 1
+            id: 10
         }
     })
 
