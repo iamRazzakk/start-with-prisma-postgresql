@@ -12,7 +12,15 @@ const mainFunction = async () => {
             id: 5
         }
     })
-    console.log({ findFirst });
+
+    // find unique
+    const finUnique = await prisma.post.findUnique({
+        where: {
+            id: 1
+        }
+    })
+
+    console.log({ finUnique });
 
 }
 
