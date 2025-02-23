@@ -8,11 +8,45 @@ datasource db {
 }
 
 model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  published Boolean  @default(false)
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  updateAt  DateTime @default(now())
+  userId    Int
+}
+
+model User {
   id       Int      @id @default(autoincrement())
-  titlle   String
-  content  String
-  publish  Boolean  @default(false)
-  author   String
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  userName String
+  email    String
+  role     UserRole
+  profile  Profile? // one to one relation
+  Post     Post[] // one to many relations
+
+  @@map("users")
+}
+
+model Profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  userId Int
+  user   User    @relation(fields: [userId], references: [id])
+
+  @@map("profiles")
+}
+
+model category {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map("categories")
+}
+
+enum UserRole {
+  ADMIN
+  USER
 }
