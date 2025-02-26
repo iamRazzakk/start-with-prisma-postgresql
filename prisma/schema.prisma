@@ -24,10 +24,10 @@ model Post {
 model User {
   id       Int      @id @default(autoincrement())
   userName String
-  email    String
+  email    String @unique
   role     UserRole @default(USER)
-  profile  Profile?
-  posts    Post[]
+  profile  Profile? // one to one relation
+  posts    Post[]  // one to may relation
 
   @@map("users")
 }
